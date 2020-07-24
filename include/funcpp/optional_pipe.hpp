@@ -6,7 +6,7 @@
  */
 
 #ifndef OPTIONAL_PIPE_HPP_INCLUDED_
-#define OPTIONAL_PIPE_HPP_INCLUDED_:
+#define OPTIONAL_PIPE_HPP_INCLUDED_
 
 
 #include <optional>
