@@ -2,9 +2,11 @@
 #define FUNCPP_TYPE_SELECTOR_HPP
 
 namespace funcpp {
-  namespace type {
+namespace type {
 
-  }
+
+
 }
+} // namespace funcpp
 
 #endif
