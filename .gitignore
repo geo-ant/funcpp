@@ -38,3 +38,4 @@ cmake-build-debug/
 cmake-build-release/
 CMakeLists.txt
 include/catch2/
+build/

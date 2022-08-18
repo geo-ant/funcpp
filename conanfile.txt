@@ -1,0 +1,6 @@
+[requires]
+  catch2/2.13.9
+
+[generators]
+  cmake
+  cmake_find_package
