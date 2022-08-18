@@ -20,11 +20,17 @@ enable_testing()
 add_library(funcpp INTERFACE)
 target_include_directories(funcpp INTERFACE include/)
 
-add_executable(test_if_expressions test/test_if_expr.cpp test/test_main.cpp)
-set_property(TARGET test_if_expressions PROPERTY CXX_STANDARD 17)
+# tests for the if expressions
+add_executable(test_if_expressions test/test_if_expr.cpp test/catch_main.cpp)
+# this actually requires C++14 because of some copy elision thingies, I think
+set_property(TARGET test_if_expressions PROPERTY CXX_STANDARD 14)
 target_link_libraries(test_if_expressions PRIVATE funcpp)
 add_test(NAME test_if_expressions COMMAND test_if_expressions)
 target_link_libraries(test_if_expressions PRIVATE Catch2::Catch2)
+
+# tests for type selectors (if expressions for types)
+add_executable(test_type_selector test/test_type_selector.cpp)
+target_link_libraries(test_type_selector PRIVATE funcpp)
 
 add_compile_options("-Wall" "-Werror" "-Wextra")
 
