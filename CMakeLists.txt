@@ -31,6 +31,7 @@ target_link_libraries(test_if_expressions PRIVATE Catch2::Catch2)
 # tests for type selectors (if expressions for types)
 add_executable(test_type_selector test/test_type_selector.cpp)
 target_link_libraries(test_type_selector PRIVATE funcpp)
+add_test(NAME test_type_selector COMMAND test_type_selector)
 
 add_compile_options("-Wall" "-Werror" "-Wextra")
 
