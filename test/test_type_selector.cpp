@@ -1,14 +1,26 @@
 // we don't need catch here because we can test everything with static assertions
 #include <type_traits>
+#include <cstdint>
 #include "funcpp/type_selector.hpp"
 
-using namespace funcpp::type;
+using funcpp::type::If;
 
 
-// a random use case
+// a couple of random use cases
 constexpr int i = 2;
 using LastType = If<i < 2>::Then<int>::ElseIf<(i<3)>::Then<float>::Else<bool>;
 static_assert(std::is_same<LastType,float>::value);
+
+constexpr int BIT_COUNT = 17;
+using IntType = If<(BIT_COUNT <= 8)>
+                ::Then<uint8_t>
+                ::ElseIf<(BIT_COUNT <= 16)>
+                ::Then<uint16_t>
+                ::ElseIf<(BIT_COUNT <= 32)>
+                ::Then<uint32_t>
+                ::Else<uint64_t>;
+static_assert(std::is_same<IntType,uint32_t>::value);
+
 
 // structured testing
 using A1 = If<true>::Then<float>::Else<bool>;

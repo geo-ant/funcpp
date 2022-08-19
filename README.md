@@ -60,3 +60,27 @@ std::string salutation  = If(is_french).Then<std::string>("Bon Jour").Else("Hell
 
 ### Further Reading
 You can read about the implementation, more details, and some caveats on my blog [here](https://geo-ant.github.io/blog/2020/if-expressions-for-cpp-part1/).
+
+
+## Compile Time If Expressions for Conditionally Selecting Types
+Located in the header `type_selector.hpp`, this expands the idea of the if expressions above and makes a similar syntax available to conditionally select types at compile time. While the standard library `std::conditional` 
+metafunction only allows us to perform a simple _if_-_else_ logic, the type selection metafunctions allow for more complicated logic while still giving us a readable syntax.
+
+### Example Code
+We can use the metafunctions like so:
+```c++
+using funcpp::type::If;
+constexpr int BIT_COUNT = /* some value */;
+using IntType = If<(BIT_COUNT <= 8)>
+                ::Then<uint8_t>
+                ::ElseIf<(BIT_COUNT <= 16)>
+                ::Then<uint16_t>
+                ::ElseIf<(BIT_COUNT <= 32)>
+                ::Then<uint32_t>
+                ::Else<uint64_t>;
+static_assert(std::is_same<IntType,uint16_t>::value);
+```
+Note that `funcpp::type::If` is different than `funcpp::If` because the former is a metafunction that operates on _types. We can use the `funcpp::If` at compile time as well, but only for `constexpr` _values_, not types.
+
+### Further Reading
+You can read more about the implementation in the [corresponding article](https://geo-ant.github.io/blog/2022/compile-time-if-expressions-for-types-in-cpp/) on my dev blog.
